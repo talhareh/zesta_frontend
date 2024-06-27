@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      <div className="flex h-[100vh] w-screen p-2.5 rounded-[10px] bg-black text-white">
+      <div className="flex h-[95vh] w-[99vw] p-5 rounded-[25px] bg-black text-white">
       
       <SideBar/>
 
