@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 // eslint-disable-next-line react/prop-types
-const PostContent = ({article}) => {
+const PostContent = ({article, prompt}) => {
     const [blog , setBlog]  =useState('')
     const [bpSent, setBpSent] = useState(false)
 
@@ -47,15 +47,20 @@ const PostContent = ({article}) => {
             <div className="h-full border-l-2 border-gray-400"></div>
             
             {/** Generated Post Section starts */}
+            
             {bpSent ?(
-                <div className="loader flex-grow">
+                <div className="loader flex-grow my">
                     <Skeleton count={15}/>
                 </div>
             ):
             (
                 <div className="generated flex-1 text-center  m-1">
-                    
-                    <p>{article} </p>
+                    <div className="prompt ">
+                        {prompt}
+                    </div>
+                    <div className="blog my-3 text-red-500">
+                        <p>{article} </p>
+                    </div>
                 </div>
             )}
 

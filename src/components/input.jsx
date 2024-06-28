@@ -27,13 +27,13 @@ const Input = ({blog, setBpSent}) => {
 	};
 
     const onSent = async () =>{
-		console.log({blog: blog, prompt: input})
+		//console.log({blog: blog, prompt: input})
         try {
 				setBpSent(true)
-				await axios.post('http://18.153.208.160:4000/fromMake', 
+				await axios.post('https://hook.eu2.make.com/cr6eqvw561yryenmpqob1u26abvvxi9k', 
 								{ 
-								topic : input,
-								article: blog 
+									prompt : input,
+									blog: blog 
 								});
 				setTimeout(() => {setBpSent(false)},3000)
 				

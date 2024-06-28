@@ -8,6 +8,7 @@ import PostContent from './PostContent'
 function App() {
 
   const [article, setArticle] = useState('')
+  const [query, setQuery] = useState('')
 
   useEffect(() =>{
     const socket = new WebSocket(`ws://18.153.208.160:4001`)
@@ -19,7 +20,10 @@ function App() {
     socket.onmessage = (event) =>{
       console.log('data recieved')
       const data = JSON.parse(event.data);
-      setArticle(data.article)
+      console.log({data:data})
+      setArticle(data.blog)
+      setQuery(data.prompt)
+      
     }
     
     socket.onclose = () => {
@@ -38,7 +42,10 @@ function App() {
       <SideBar/>
 
       {/* Top menu will come here*/}
-      <PostContent article={article}/>
+      <PostContent 
+        article={article}
+        prompt={query}
+      />
       
     </div>
     </>
