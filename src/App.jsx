@@ -10,7 +10,7 @@ function App() {
   const [article, setArticle] = useState('')
 
   useEffect(() =>{
-    const socket = new WebSocket(`wss://make-automation-backend.vercel.app`)
+    const socket = new WebSocket(`ws://18.153.208.160:4001`)
 
     socket.onopen = () =>{
       console.log("Web socket established")

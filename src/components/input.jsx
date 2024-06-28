@@ -3,7 +3,7 @@ import { useState } from "react";
 import {FaImage, FaMicrophone, FaArrowAltCircleUp, FaPlusSquare } from 'react-icons/fa'
 import axios from "axios";
 // eslint-disable-next-line react/prop-types
-const Input = ({blog}) => {
+const Input = ({blog, setBpSent}) => {
 
     
     const [input,setInput] =useState('');
@@ -24,25 +24,22 @@ const Input = ({blog}) => {
 		if (e.key === "Enter" && input && blog) {
 			onSent();
 		}
-        else
-        {
-            console.log('Input or blog empty')
-        }
 	};
 
     const onSent = async () =>{
 		console.log({blog: blog, prompt: input})
-        // try {
-      
-        //     await axios.post('https://hook.eu2.make.com/cr6eqvw561yryenmpqob1u26abvvxi9k', 
-        //                     { 
-        //                       input,
-        //                       blog 
-        //                     });    
-        //   } catch (error) {
-        //     console.error('Error sending topic:', error);
-            
-        //   }
+        try {
+				setBpSent(true)
+				await axios.post('http://18.153.208.160:4000/fromMake', 
+								{ 
+								topic : input,
+								article: blog 
+								});
+				setTimeout(() => {setBpSent(false)},3000)
+				
+			} catch (error) {
+            console.error('Error sending topic:', error);
+          }
     }
 
 	return (

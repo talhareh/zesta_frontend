@@ -1,10 +1,14 @@
 import Input from "./components/input"
 import "./App.css"
 import { useState } from "react"
+import  Skeleton  from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 
-const PostContent = () => {
+// eslint-disable-next-line react/prop-types
+const PostContent = ({article}) => {
     const [blog , setBlog]  =useState('')
+    const [bpSent, setBpSent] = useState(false)
 
     const blogChange = (event) =>{
         setBlog(event.target.textContent)
@@ -31,15 +35,30 @@ const PostContent = () => {
                     </div>
                 </div> 
                 <div className="iputBox my-2 w-full">
-                    <Input blog= {blog}/>
+                    <Input 
+                        blog= {blog} 
+                        bpSent = {bpSent} 
+                        setBpSent= {setBpSent}
+                    />
                 </div>
 
             </div>
             
             <div className="h-full border-l-2 border-gray-400"></div>
-            <div className="flex-1 text-center  m-1">
-                Generated Post
-            </div>
+            
+            {/** Generated Post Section starts */}
+            {bpSent ?(
+                <div className="loader flex-grow">
+                    <Skeleton count={15}/>
+                </div>
+            ):
+            (
+                <div className="generated flex-1 text-center  m-1">
+                    
+                    <p>{article} </p>
+                </div>
+            )}
+
         </div>
 
         
