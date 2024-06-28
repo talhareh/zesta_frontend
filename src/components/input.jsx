@@ -1,19 +1,17 @@
-//import { useContext } from "react";
-//import { Context } from "../context/Context";
+
 import { useState } from "react";
 import {FaImage, FaMicrophone, FaArrowAltCircleUp, FaPlusSquare } from 'react-icons/fa'
-
-
-// Input component for user prompts
+import axios from "axios";
+// eslint-disable-next-line react/prop-types
 const Input = ({blog}) => {
 
-    // Accessing context for managing user input and sending prompts
-	//const { onSent, setInput, input } = useContext(Context);
+    
     const [input,setInput] =useState('');
-	// Function to handle sending prompt on button click
+	
 	const handleSendClick = () => {
 
 		if (input && blog) {
+
 			onSent();
 		}
         else{
@@ -21,21 +19,36 @@ const Input = ({blog}) => {
         }
 	};
 
-	// Function to handle sending prompt on pressing Enter key
+	
 	const handleKeyDown = (e) => {
-		if (e.key === "Enter" && input) {
+		if (e.key === "Enter" && input && blog) {
 			onSent();
 		}
+        else
+        {
+            console.log('Input or blog empty')
+        }
 	};
 
-    const onSent = () =>{
-        console.log({input: input})
+    const onSent = async () =>{
+		console.log({blog: blog, prompt: input})
+        // try {
+      
+        //     await axios.post('https://hook.eu2.make.com/cr6eqvw561yryenmpqob1u26abvvxi9k', 
+        //                     { 
+        //                       input,
+        //                       blog 
+        //                     });    
+        //   } catch (error) {
+        //     console.error('Error sending topic:', error);
+            
+        //   }
     }
 
 	return (
 		<div className="w-full mx-auto">
 			<div className="flex items-center justify-center gap-4 px-4 py-3 bg-[#fff] lg:py-2 rounded-full md:flex-row md:justify-between text-[#000]">
-				{/* Input field for user prompt */}
+				
 				<FaPlusSquare/>
                 <input
 					onChange={(e) => setInput(e.target.value)}
