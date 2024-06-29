@@ -10,6 +10,12 @@ function App() {
   const [article, setArticle] = useState('')
   const [query, setQuery] = useState('')
 
+  const delayPara = (index, nextWord) => {
+		setTimeout(() => {
+			setArticle((prev) => prev + nextWord);
+		}, 75 * index);
+	};
+
   useEffect(() =>{
     const socket = new WebSocket(`ws://18.153.208.160:4001`)
 
@@ -20,9 +26,13 @@ function App() {
     socket.onmessage = (event) =>{
       console.log('data recieved')
       const data = JSON.parse(event.data);
-      console.log({data:data})
-      setArticle(data.blog)
+      //console.log({data:data})
       setQuery(data.prompt)
+      let rawBlog= data.blog.split(" ")
+      for(let i = 0; i< rawBlog.length; i++){
+          const nextWord = rawBlog[i]
+          delayPara(i, nextWord +" ")
+      }
       
     }
     
