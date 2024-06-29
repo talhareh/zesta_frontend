@@ -105,28 +105,32 @@ const PostContent = ({article, setArticle, prompt, setPrompt}) => {
 
                 <div className="my-1 w-full mx-auto rounded-[15px]">
                     <div className="buttonContainer flex p-4 justify-center space-x-4 ">
-						<button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px]"
+						<button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px] hover:opacity-95
+                                           transform transition-transform duration-150 active:scale-95"
                                 onClick={makeEdit}
                         >
                             Edit
                         </button>
                         {copied && (
-									// Render copied message if copied is true
-									<div className="absolute top-12 right-12 bg-green-500 text-white px-2 py-1 rounded">
-										Copied!
-									</div>
+                            <div className="absolute top-12 right-12 bg-green-500 text-white px-2 py-1 rounded
+                                            transform transition-transform duration-150 active:scale-95">
+                                Copied!
+                            </div>
 						)}
-                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px]"
+                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px] hover:opacity-90
+                                           transform transition-transform duration-150 active:scale-95"
                                 onClick= {copyContent}
                         >
                             Copy
                         </button>
 
-                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px]">
+                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px] hover:opacity-90
+                                           transform transition-transform duration-150 active:scale-95">
                             Save
                         </button>
 
-                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px]"
+                        <button className="px-8 py-2 bg-gray-800 text-icon-color rounded-[12px] hover:opacity-90
+                                           transform transition-transform duration-150 active:scale-95"
                                 onClick= {clearResponse}
                         >
                             Clear
