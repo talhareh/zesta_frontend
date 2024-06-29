@@ -35,7 +35,7 @@ const Input = ({blog, setBpSent}) => {
 									prompt : input,
 									blog: blog 
 								});
-				setTimeout(() => {setBpSent(false)},3000)
+				setBpSent(false)
 				
 			} catch (error) {
             console.error('Error sending topic:', error);

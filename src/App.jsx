@@ -54,7 +54,9 @@ function App() {
       {/* Top menu will come here*/}
       <PostContent 
         article={article}
+        setArticle= {setArticle}
         prompt={query}
+        setPrompt = {setQuery}
       />
       
     </div>

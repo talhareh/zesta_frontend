@@ -1,4 +1,15 @@
 .icon-color{
     color:#D7FE03;
-    
+  }
+
+  .generated {
+    overflow-y: scroll; /* Enable scrolling */
+  
+
+    scrollbar-width: thin; 
+    scrollbar-color: #1c07dd #f10303; 
+  }
+  
+  .generated:hover {
+    scrollbar-color: #F5F5F5 #888; 
   }
