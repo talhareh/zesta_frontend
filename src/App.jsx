@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+
+import SideBar from './SideBar'
+import './App.css'
+import PostContent from './PostContent'
+
 
 function App() {
-  const [topic, setTopic] = useState('')
+
   const [article, setArticle] = useState('')
+  const [query, setQuery] = useState('')
 
-  const handleInputChange = (e) => {
-    setTopic(e.target.value)
-  } 
-
-  const handleGenerate = async () => {
-    try {
-      
-      await axios.post('https://hook.eu2.make.com/cr6eqvw561yryenmpqob1u26abvvxi9k', { topic });
-      console.log('Topic sent successfully:', topic);
-      
-    } catch (error) {
-      console.error('Error sending topic:', error);
-      
-    }
-  };
+  const delayPara = (index, nextWord) => {
+		setTimeout(() => {
+			setArticle((prev) => prev + nextWord);
+		}, 75 * index);
+	};
 
   useEffect(() =>{
-    const socket = new WebSocket(`wss://make-automation-backend.vercel.app`)
+    const socket = new WebSocket(`ws://18.153.208.160:4001`)
 
     socket.onopen = () =>{
       console.log("Web socket established")
@@ -31,7 +26,14 @@ function App() {
     socket.onmessage = (event) =>{
       console.log('data recieved')
       const data = JSON.parse(event.data);
-      setArticle(data.article)
+      //console.log({data:data})
+      setQuery(data.prompt)
+      let rawBlog= data.blog.split(" ")
+      for(let i = 0; i< rawBlog.length; i++){
+          const nextWord = rawBlog[i]
+          delayPara(i, nextWord +" ")
+      }
+      
     }
     
     socket.onclose = () => {
@@ -45,28 +47,19 @@ function App() {
 
   return (
     <>
-        <div className="container">
-          <div className="user-input">
-              <h4> Enter Topic </h4>
-              <div className="inputText">
-                <input type= "text" onChange={handleInputChange}/>
-                
-              </div>
+      <div className="flex h-[95vh] w-[99vw] p-5 rounded-[25px] bg-black text-white">
+      
+      <SideBar/>
 
-              <div className="genButton">
-                <button onClick= {() => {handleGenerate()}}>Generate</button>
-              </div>
-          </div> 
-
-          <div className="articleGenerated">
-            <div className="topic">
-              Topic : {topic}
-            </div>
-            <div className="articleRecieved">
-              {article}
-            </div>
-          </div>
-        </div>     
+      {/* Top menu will come here*/}
+      <PostContent 
+        article={article}
+        setArticle= {setArticle}
+        prompt={query}
+        setPrompt = {setQuery}
+      />
+      
+    </div>
     </>
   )
 }
